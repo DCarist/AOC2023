@@ -100,6 +100,13 @@ def day_2_part_1(string_list: list[str]) -> int:
 
     return total
     
+def day_2_part_2(string_list: list[str]) -> int:
+    total = 0
+
+    for game in string_list:
+        total+= parse_line_game_power(game)
+    return total
+
 def return_min_cubes(dice_pulled_per_round:list[Round]):
     """
         Given a list of Rounds, return the minimum
@@ -112,16 +119,22 @@ def return_min_cubes(dice_pulled_per_round:list[Round]):
 
 def parse_line_game_power(game_string:str) -> int:
     """
-    
+        Creates a Game from a string, and returns its power.
+        where power is the minR * minG * minB
     """
     game_number , round_info = game_string.split(':')
     game_number = game_number[4:]
     string_list_rounds = round_info.split(';')
     round_list:list[Round] = []
     for string in string_list_rounds:
-        dice_pulled = round.split(',')
+        dice_pulled = string.split(',')
         cur_round = create_round(dice_pulled)
-def parse_line_game_number(game_string:str) -> int:
+        round_list.append(cur_round)
+    current_game = Game(round_list)
+
+    return current_game.power()
+
+def parse_line_game_number(game_string:list[str]) -> int:
     """
         We need to split up the line into the requisite info
         Game #: Round{<ColoredDice>, <ColoredDice>, <ColoredDice> }; Round{<ColoredDice>, <ColoredDice>}; 
@@ -153,4 +166,6 @@ if __name__ == '__main__':
         input = file.readlines()
     
     print(day_2_part_1(input))
+    print('--------')
+    print(day_2_part_2(input))
 

@@ -72,3 +72,25 @@ def test_game_power():
     test_game = day_2.Game(test_round_list)
 
     assert test_game.power() == (6*7*8)
+
+def test_game_power_parser():
+    test_string_list = DEFAULT_TEST_STRING.split('\n')
+    
+    power_list = []
+
+    TEST_VALUES = [48, 12, 1560, 630, 36]
+    for string in test_string_list:
+        power = day_2.parse_line_game_power(string)
+        power_list.append(power)
+
+    sum_power =0 
+    for result, test in zip(power_list, TEST_VALUES):
+        assert result == test
+        sum_power += result
+
+    assert sum_power == 2286
+    
+
+    
+    
+    
