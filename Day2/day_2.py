@@ -59,7 +59,13 @@ class Game():
             
         return (min_red, min_green, min_blue)
 
-        
+    def power(self) -> int:
+        """
+            Returns the power (minR * minG * minB) of a Game.
+        """
+        color_tuple:tuple(ColoredDice, ColoredDice, ColoredDice) = self.minimum_dice_possible()
+
+        return color_tuple[0].number * color_tuple[1].number * color_tuple[2].number
 
 
 

@@ -51,11 +51,7 @@ def test_line_parse_false():
     test_string = "Game 1: 3 blue, 4 red; 1 red, 2 green, 60 blue; 2 green"
     assert day_2.parse_line_game_number(test_string) == 0
 
-def test_min_cubes():
-    #test_string = DEFAULT_TEST_STRING[0]
-    test_round = DEFAULT_ROUND
 
-    assert test_round.minimum_possible_dice() == 0
 
 def test_game_init():
 
@@ -70,3 +66,9 @@ def test_game_min():
     assert DEFAULT_RED_DICE == dice_tuple[0]
     assert DEFAULT_GREEN_DICE == dice_tuple[1]
     assert DEFAULT_BLUE_DICE == dice_tuple[2]
+
+def test_game_power():
+    test_round_list = [DEFAULT_ROUND]
+    test_game = day_2.Game(test_round_list)
+
+    assert test_game.power() == (6*7*8)
