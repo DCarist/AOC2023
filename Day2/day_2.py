@@ -54,10 +54,10 @@ def create_round(string_list: list[str]) -> Round:
             blue_dice = create_diceroll(string)
     return Round(red_dice, green_dice, blue_dice)
 
-def day_2_part_1(string:str) -> int:
-    game_list = string.split('\n')
+def day_2_part_1(string_list: list[str]) -> int:
+    #game_list = string.split('\n')
     total = 0
-    for game in game_list:
+    for game in string_list:
         total += parse_line(game)
 
     return total
