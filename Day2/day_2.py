@@ -110,8 +110,17 @@ def return_min_cubes(dice_pulled_per_round:list[Round]):
         CD1 -> has Number, color. 
     """
 
+def parse_line_game_power(game_string:str) -> int:
+    """
     
-
+    """
+    game_number , round_info = game_string.split(':')
+    game_number = game_number[4:]
+    string_list_rounds = round_info.split(';')
+    round_list:list[Round] = []
+    for string in string_list_rounds:
+        dice_pulled = round.split(',')
+        cur_round = create_round(dice_pulled)
 def parse_line_game_number(game_string:str) -> int:
     """
         We need to split up the line into the requisite info
@@ -126,9 +135,9 @@ def parse_line_game_number(game_string:str) -> int:
     possible_game = True
     for round in round_list:
         # Check each round if it is possible.
-        dice_rolls = round.split(',')
+        dice_pulled = round.split(',')
         #dice_rolls should be a string list 
-        cur_round = create_round(dice_rolls)
+        cur_round = create_round(dice_pulled)
         #will be false if not possible.
         possible_game = cur_round.possible_round(R_MAX,G_MAX,B_MAX)
         if possible_game is False:
