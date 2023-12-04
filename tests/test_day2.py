@@ -66,5 +66,7 @@ def test_game_min():
     test_round_list = [DEFAULT_ROUND]
     test_game = day_2.Game(test_round_list)
 
-    test_game.minimum_dice_possible()
-
+    dice_tuple = test_game.minimum_dice_possible()
+    assert DEFAULT_RED_DICE == dice_tuple[0]
+    assert DEFAULT_GREEN_DICE == dice_tuple[1]
+    assert DEFAULT_BLUE_DICE == dice_tuple[2]
