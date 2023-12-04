@@ -6,7 +6,7 @@ B_MAX = 14
 
 test_string = ["Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"]
 @dataclass
-class DiceRoll():
+class ColoredDice():
     """
     """
     number:int
@@ -16,9 +16,9 @@ class DiceRoll():
 class Round():
     """
     """
-    red_dice:DiceRoll = DiceRoll(0,'red')
-    green_dice:DiceRoll =DiceRoll(0,'green')
-    blue_dice:DiceRoll = DiceRoll(0,'blue')
+    red_dice:ColoredDice = ColoredDice(0,'red')
+    green_dice:ColoredDice =ColoredDice(0,'green')
+    blue_dice:ColoredDice = ColoredDice(0,'blue')
 
     def possible_round(self,R_MAX:int, G_MAX:int, B_MAX:int) -> bool:
         if (self.red_dice.number > R_MAX or 
@@ -31,50 +31,50 @@ class Round():
 
 
 
-def create_diceroll(string:str):
+def create_ColoredDice(string:str):
     """
-        Converts a string with # color into a DiceRoll
+        Converts a string with # color into a ColoredDice
     """
     number, color = string.split()
-    return DiceRoll(int(number), color) 
+    return ColoredDice(int(number), color) 
 
 def create_round(string_list: list[str]) -> Round:
     """
         Creates a round from a list of strings with round Info.
     """   
-    red_dice = DiceRoll(0,'red')
-    green_dice = DiceRoll(0,'green')
-    blue_dice = DiceRoll(0,'blue')
+    red_dice = ColoredDice(0,'red')
+    green_dice = ColoredDice(0,'green')
+    blue_dice = ColoredDice(0,'blue')
     for string in string_list:
         if 'red' in string:
-            red_dice = create_diceroll(string)
+            red_dice = create_ColoredDice(string)
         elif 'green' in string:
-            green_dice = create_diceroll(string)
+            green_dice = create_ColoredDice(string)
         elif 'blue' in string:
-            blue_dice = create_diceroll(string)
+            blue_dice = create_ColoredDice(string)
     return Round(red_dice, green_dice, blue_dice)
 
 def day_2_part_1(string_list: list[str]) -> int:
     #game_list = string.split('\n')
     total = 0
     for game in string_list:
-        total += parse_line(game)
+        total += parse_line_game_number(game)
 
     return total
     
-def return_min_cubes(dice_pulled_per_round:list[DiceRoll]):
+def return_min_cubes(dice_pulled_per_round:list[ColoredDice]):
     """
-        Given a list of DiceRoll, return the minimum
+        Given a list of ColoredDice, return the minimum
         amount of dice that could be in the bag.
     """
 
-    
-def parse_line(game_string:str) -> int:
+
+def parse_line_game_number(game_string:str) -> int:
     """
         We need to split up the line into the requisite info
-        Game #: Round{<DiceRoll>, <DiceRoll>, <DiceRoll> }; Round{<DiceRoll>, <DiceRoll>}; 
+        Game #: Round{<ColoredDice>, <ColoredDice>, <ColoredDice> }; Round{<ColoredDice>, <ColoredDice>}; 
         Each Game has multiple rounds
-        Each Round has up to 3 dice rolls, up to 1 of each color.
+        Each Round has up to 3 colored dice, up to 1 of each color.
 
     """
     game_number , round_info = game_string.split(':')
