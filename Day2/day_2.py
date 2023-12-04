@@ -62,7 +62,13 @@ def day_2_part_1(string_list: list[str]) -> int:
 
     return total
     
+def return_min_cubes(dice_pulled_per_round:list[DiceRoll]):
+    """
+        Given a list of DiceRoll, return the minimum
+        amount of dice that could be in the bag.
+    """
 
+    
 def parse_line(game_string:str) -> int:
     """
         We need to split up the line into the requisite info
