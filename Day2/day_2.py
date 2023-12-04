@@ -8,13 +8,21 @@ test_string = ["Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"]
 @dataclass
 class ColoredDice():
     """
+        number:int
+        color:str
     """
+
     number:int
     color:str
+
+    def __lt__(self, other):
+        return self.number < other.number
 
 @dataclass
 class Round():
     """
+        RGB_dice: ColoredDice
+        
     """
     red_dice:ColoredDice = ColoredDice(0,'red')
     green_dice:ColoredDice =ColoredDice(0,'green')
@@ -28,6 +36,30 @@ class Round():
             return False
         else:
             return True
+
+class Game():
+    round_list:list[Round]
+
+    def __init__(self, round_list:list[Round]):
+        self.round_list =round_list
+
+    def minimum_dice_possible(self) -> (ColoredDice, ColoredDice, ColoredDice):
+        
+        min_red = ColoredDice(0,'red')
+        min_green = ColoredDice(0,'green')
+        min_blue = ColoredDice(0,'blue')
+
+        for round in self.round_list:
+            if min_red < round.red_dice:
+                min_red.number = round.red_dice.number
+            if min_green < round.green_dice:
+                min_green.number = round.green_dice.number
+            if min_blue < round.blue_dice:
+                min_blue.number = round.blue_dice.number
+            
+        return (min_red, min_green, min_blue)
+
+        
 
 
 
@@ -62,12 +94,17 @@ def day_2_part_1(string_list: list[str]) -> int:
 
     return total
     
-def return_min_cubes(dice_pulled_per_round:list[ColoredDice]):
+def return_min_cubes(dice_pulled_per_round:list[Round]):
     """
-        Given a list of ColoredDice, return the minimum
+        Given a list of Rounds, return the minimum
         amount of dice that could be in the bag.
+
+        List = [CD1, CD2, CD3]
+
+        CD1 -> has Number, color. 
     """
 
+    
 
 def parse_line_game_number(game_string:str) -> int:
     """
