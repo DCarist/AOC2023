@@ -53,10 +53,11 @@ class EngineSchematic():
 
     def find_symbol_code(self):
         
+        sum = 0
         for symbol in self.symbol_list:
-            self._compute_number(symbol.x_pos,symbol.y_pos)
+            sum+= self._compute_number(symbol.x_pos,symbol.y_pos)
             #don't want out of index or other funny business
-
+        return sum
         #our components are in a list of lists [y][x]
 
 
@@ -66,15 +67,34 @@ class EngineSchematic():
             <- X-1, Y  X,Y  , X+1, Y   ->
             <- X-1,Y+1 X,Y+1, X+1, Y+1 ->
         """
-        
-        #check up, down
-        self._check_right(x,y-1)
-        self._check_left(x,y+1)
-        self._check_right(x,y+1)
+        num = 0
+        #check up
+        top_row = 0
+        top_row +=self._check_right(x,y-1,True)
+        if top_row == 0:
+            top_row+=self._check_right(x+1,y-1)
 
-    def _check_right(self, x,y):
+        #check current line
+        mid_row = 0
+        if self._check_left(x-1,y) != '':
+            mid_row+= int(self._check_left(x-1,y))
+        mid_row+=self._check_right(x+1,y)
+
+        #check down
+        bottom_row = 0
+        bottom_row+=self._check_right(x,y+1,True)
+        if bottom_row == 0:
+            bottom_row+=self._check_right(x+1,y+1)
+        num = top_row + mid_row + bottom_row
+        return num
+    
+    def _check_right(self, x,y, check_reverse=False):
         #start in the middle
         number_string:str = ''
+        cur_pos = self.component_list[y][x-1].value
+        if cur_pos != BLANK and check_reverse is True:
+            #if the number before is not blank, go in reverse first.
+            number_string = self._check_left(x-1,y)
         cur_pos = self.component_list[y][x].value
         while cur_pos != BLANK:
 
@@ -85,9 +105,9 @@ class EngineSchematic():
         if number_string != '':
             return int(number_string)
         else:
-            return
+            return 0
         
-    def _check_left(self,x,y):
+    def _check_left(self,x,y) -> str:
         number_string:str = ''
         cur_pos = self.component_list[y][x].value
         while cur_pos != BLANK:
@@ -95,19 +115,19 @@ class EngineSchematic():
             x-= 1
             cur_pos = self.component_list[y][x].value
         
-        print(number_string)
+        #print(number_string)
         if number_string != '':
-            return int(number_string)
+            return number_string
         else:
-            return
+            return number_string
         
     
 
-def day_3_part_1(input:str):
+def day_3_part_1(input:str) -> int:
     
     string_list = input.split('\n')
     engine = EngineSchematic(string_list)
-
+    return engine.find_symbol_code()
 
 if __name__ == '__main__':
     input = """467..114..

@@ -11,7 +11,7 @@ TEST_STRING = """467..114..
 ...$.*....
 .664.598.."""
 
-def test_day_2():
+def test_day_3_part_1():
     #string_list = TEST_STRING.split('\n')
-    day_3.day_3_part_1(TEST_STRING)
+    assert day_3.day_3_part_1(TEST_STRING) == 4361
 
