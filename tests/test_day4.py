@@ -9,6 +9,7 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"""
 def test_Card():
     test_card = day_4.Card('Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53')
     assert test_card.winning_value() ==8
+    assert test_card.duplicates_generated() == 4
 
 def test_part_1():
     assert day_4.day_4_part_1(TEST_INPUT) == 13

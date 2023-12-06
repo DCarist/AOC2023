@@ -26,6 +26,9 @@ class Card():
                 val = val*2
 
         return val
+    
+    def duplicates_generated(self) -> int:
+        return len(self.winning_numbers.intersection(self.card_numbers))
         
 def day_4_part_1(string:str) -> int:
     string_list = string.split('\n')
@@ -43,7 +46,7 @@ def main():
         input = file.read()
 
     print(day_4_part_1(input))
-    
+
 if __name__ == "__main__":
     main()
     
