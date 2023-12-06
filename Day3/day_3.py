@@ -186,7 +186,7 @@ def day_3_part_1(input:str) -> int:
 def day_3_part_2(input:str) -> int:
     string_list = input.split('\n')
     engine = EngineSchematic(string_list)
-    return engine.find_gear_ratio()
+    return engine.find_gears()
 
 def main():
     with open('Day3/day_3_input.txt') as file:
