@@ -35,16 +35,16 @@ class Card():
     
 class Deck():
 
-    deck:list[Card]
+    deck:list[list[Card]]
     card_count:int
     current_card:int=0
 
-    def __init__(self,deck:list[Card]=[]):
+    def __init__(self,deck:list[Card]=[[]]):
         self.deck = deck
         self.card_count = len(self.deck)
 
     def append(self, card:Card) -> None:
-        self.deck.append(card)
+        self.deck[self.card_count-1].append(card)
         self.card_count = len(self.deck)
 
     def copy_card(self,card:Card, position:int) -> None:
@@ -53,19 +53,12 @@ class Deck():
 
     def process_cards(self):
         
-        for card in self.deck:
+        for card_list in self.deck:
+            self.cards_to_copy(card_list)
             cards_to_copy = card.duplicates_generated()
             card_offset = 1
             while cards_to_copy >0:
-                for card2 in self.deck:
-                    if card2.card_number == card.card_number + card_offset:
-                        card_to_copy = card2
-                        insert_pos = self.deck.index(card2)
-                        break
-                    else:
-                        card_to_copy = None
-                if card_to_copy is not None:
-                    self.copy_card(card_to_copy, insert_pos)
+                
                 cards_to_copy -= 1
                 card_offset += 1
                 
@@ -76,9 +69,7 @@ class Deck():
         return len(self.deck)
     
     def return_location_of_next_card(self, cur_card:Card):
-        index = cur_card.card_number
-        for card in self.deck:
-                    
+        index = cur_card.card_number   
 
 
 def day_4_part_1(string:str) -> int:
