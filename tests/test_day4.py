@@ -11,5 +11,22 @@ def test_Card():
     assert test_card.winning_value() ==8
     assert test_card.duplicates_generated() == 4
 
+
 def test_part_1():
     assert day_4.day_4_part_1(TEST_INPUT) == 13
+
+def test_duplicates_generated():
+    solution = [4,2,2,1,0,0]
+    test_list = []
+    for string in TEST_INPUT.split('\n'):
+        test_card = day_4.Card(string)
+        test_list.append(test_card.duplicates_generated())
+    assert solution == test_list
+
+def test_part_2():
+    solution = [1,2,4,8,14,1]
+    sum = 30
+
+    assert day_4.day_4_part_2(TEST_INPUT) == sum
+
+
