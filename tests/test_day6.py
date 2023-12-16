@@ -30,3 +30,7 @@ def test_boats():
 def test_string_parse_2():
 
     assert day_6.part_two_string(TEST_STRING) == (71530,940200)
+
+def test_smart_race():
+
+    assert day_6.Smart_Race(71530, 940200).possible_solution == 71503

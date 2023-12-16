@@ -12,6 +12,13 @@ class Boat():
         
         self.distance = (tot_time - accel_time) * self.velocity
 
+    def beats_record(self, record:int):
+
+        if self.distance > record:
+            return True
+        else:
+            return False
+
 class Race():
 
     def __init__(self, race_time:int, record_distance:int):
@@ -22,7 +29,19 @@ class Race():
 class Smart_Race():
 
     def __init__(self, race_time:int, record_distance:int):
-        pass   
+        x = 1
+        y = race_time - 1
+        cur_boat = Boat(x,race_time)
+
+        while not cur_boat.beats_record(record_distance):
+            x += 1
+            cur_boat = Boat(x,race_time)
+        cur_boat = Boat(y, race_time)
+        while not cur_boat.beats_record(record_distance):
+            y -= 1
+            cur_boat = Boat(y, race_time)
+        
+        self.possible_solution = y - x +1
 
 def run_possible_boats(string:str):
     race_list = []
@@ -76,8 +95,8 @@ def day_5_part_2():
 Distance:   244   1047   1228   1040"""
 
     time, distance = part_two_string(string)
-    race = Race(time,distance)
-    print(len(race.boats))
+    race = Smart_Race(time,distance)
+    print(race.possible_solution)
 
 def main():
     day_5_part_1()
