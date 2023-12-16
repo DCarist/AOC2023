@@ -36,4 +36,11 @@ humidity-to-location map:
 
 
 def test_day_5_part_1():
-    
+    pass
+
+def test_cover_map():
+    cover = day_5.ConversionMap('50 98 2')
+
+    assert cover.cover_range == 2
+    assert cover.source_start == 98
+    assert cover.dest_start == 50

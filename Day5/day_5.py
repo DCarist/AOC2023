@@ -5,13 +5,18 @@ class ConversionMap():
     source_start:int
     dest_start:int
     cover_range:int
-    conversion_list: map()
 
-    def __init__(self, string_list: list[str]):
-        
-        self.conversion_list = map(int, string_list)
+    def __init__(self, string:str):
+        vals =[int(x) for x in string.split(' ')]
+        self.dest_start = vals[0]
+        self.source_start = vals[1]
+        self.cover_range = vals[2]
 
 
+    def read_map(self, value:int) -> int:
+        """
+            Given a location 
+        """
 
 
 
